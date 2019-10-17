@@ -29,5 +29,5 @@
 # Author: Stuart Glaser
 # Maintainer: William Woodall <wwoodall@willowgarage.com>
 
-import xacro
-xacro.main()
+import xacro_robotraconteur
+xacro_robotraconteur.main()

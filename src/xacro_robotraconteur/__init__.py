@@ -44,6 +44,8 @@ from .color import warning, error, message
 from .xmlutils import *
 from .cli import process_args
 
+import xml.parsers
+import xml.parsers.expat
 
 try: # python 2
     _basestr = basestring
@@ -180,17 +182,18 @@ class Macro(object):
 
 def eval_extension(s):
     if s == '$(cwd)':
-        return os.getcwd()
+        return os.getcwd()    
+    from .substitution_args import resolve_args, ArgException
     try:
-        from roslaunch.substitution_args import resolve_args, ArgException
-        from rospkg.common import ResourceNotFound
+        from .substitution_args import resolve_args, ArgException
+        #from rospkg.common import ResourceNotFound
         return resolve_args(s, context=substitution_args_context, resolve_anon=False)
     except ImportError as e:
         raise XacroException("substitution args not supported: ", exc=e)
     except ArgException as e:
         raise XacroException("Undefined substitution argument", exc=e)
-    except ResourceNotFound as e:
-        raise XacroException("resource not found:", exc=e)
+    #except ResourceNotFound as e:
+    #    raise XacroException("resource not found:", exc=e)
 
 
 do_check_order=False

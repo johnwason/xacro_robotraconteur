@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
-from catkin_pkg.python_setup import generate_distutils_setup
+from setuptools import setup
 
-d = generate_distutils_setup(
-    packages=['xacro'],
+setup(
+    name="robotraconteur_xacro",
+    version=0.1,
+    license = "BSD",
+    packages=['xacro_robotraconteur'],
     package_dir={'': 'src'},
-    scripts=['scripts/xacro']
+    scripts=['scripts/xacro-robotraconteur']
 )
 
-setup(**d)
